@@ -58,10 +58,11 @@
         }
 
         var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/WebGL.loader.js";
+        var timestamp = new Date().getTime();
+        var loaderUrl = buildUrl + "/WebGL.loader.js?v=" + timestamp;
         var config = {
             dataUrl: buildUrl + "/WebGL.data",
-            frameworkUrl: buildUrl + "/WebGL.framework.js",
+            frameworkUrl: buildUrl + "/WebGL.framework.js?v=" + timestamp,
             codeUrl: buildUrl + "/WebGL.wasm",
             streamingAssetsUrl: "StreamingAssets",
             companyName: "DefaultCompany",
