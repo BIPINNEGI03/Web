@@ -137,16 +137,29 @@
                 canvas.msRequestFullscreen();
             }
         }
+        function getRandomReel(rows, cols, minValue, maxValue) {
+            var reel = [];
+            for (var i = 0; i < rows; i++) {
+                var row = [];
+                for (var j = 0; j < cols; j++) {
+                    // Generate a random number within the given range
+                    row.push(Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue);
+                }
+                reel.push(row);
+            }
+            return reel;
+        }
         function sendMessageToUnity() {
+            var randomReel = getRandomReel(5, 14, 0, 13);
             createUnityInstance(canvas, config)
                 .then(function (unityInstance) {
                     var data = {
-                        "sender": "raman@gmail.com",
+                        "sender": "bipinnegi02@gmail.com",
                         "message": {
                             "amount": "500",
                             "lang": "en",
                             "name": "Game 2",
-                            "reel": "[[0,8,4,5,12,1,2,11,10,5,4,8,1,5],[1,9,3,9,1,13,10,6,3,8,12,13,10,3],[4,5,2,6,10,12,11,3,10,5,3,13,1,0],[3,7,8,4,12,1,4,10,13,10,11,8,6,0],[7,11,2,1,10,13,7,0,5,13,7,6,0,9]]"
+                            "reel": JSON.stringify(randomReel)  
                         }
                     }
                     unityInstance.SendMessage("UIManager", "ReceivedData", JSON.stringify(data));
